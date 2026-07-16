@@ -9,7 +9,6 @@ import java.util.StringTokenizer;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang.StringEscapeUtils;
 import com.ibm.security.appscan.altoromutual.model.Account;
 import com.ibm.security.appscan.altoromutual.model.User;
 
@@ -120,9 +119,9 @@ public class OperationsUtil {
 			String subject, String comments) {
 		
 		if (ServletUtil.isAppPropertyTrue("enableFeedbackRetention")) {
-			email = StringEscapeUtils.escapeSql(email);
-			subject = StringEscapeUtils.escapeSql(subject);
-			comments = StringEscapeUtils.escapeSql(comments);
+			email = email.replace("'", "''");
+			subject = subject.replace("'", "''");
+			comments = comments.replace("'", "''");
 
 			long id = DBUtil.storeFeedback(name, email, subject, comments);
 			return String.valueOf(id);

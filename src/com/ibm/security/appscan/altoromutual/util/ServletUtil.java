@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.wink.json4j.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -243,7 +243,7 @@ public class ServletUtil {
 
 	/* Web output sanitizer */
 	public static String sanitizeWeb(String data) {
-		return StringEscapeUtils.escapeHtml(data);
+		return StringEscapeUtils.escapeHtml4(data);
 	}
 
 	public static String sanitzieHtmlWithRegex(String input) {
