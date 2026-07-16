@@ -4,8 +4,8 @@ plugins {
 
 // Fixed Java toolchain configuration syntax for modern Gradle
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 repositories {
@@ -23,48 +23,50 @@ sourceSets {
     }
 }
 
+war {
+    // Fixed: Set the custom WebContent folder using modern API
+    webAppDirectory = file('WebContent')
+
+    // Fixed: archiveName was replaced by archiveFileName
+    archiveFileName = 'altoromutual.war'
+
+    exclude 'WEB-INF/classes/**/*.class'
+    exclude 'WEB-INF/lib/**/*.jar'
+}
+
 dependencies {
     // Fixed fileTree syntax to use the new webAppDirectory property
     implementation fileTree(dir: "${war.webAppDirectory.get().asFile}/WEB-INF/lib", include: '*.jar')
-    
+
 
     implementation 'com.hynnet:commons-lang3:3.3.2'
     implementation 'org.apache.derby:derby:10.17.1.0'
-    
+
     implementation 'org.glassfish.jersey.containers:jersey-container-servlet:2.46'
     implementation 'org.glassfish.jersey.inject:jersey-hk2:2.46'
-    
+
     implementation 'org.apache.wink:wink-json4j:1.4'
-    
 
 
-    
+
+
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.9'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.18.7'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.18.9'
-    
+
 
     implementation 'commons-beanutils:commons-beanutils:1.11.0'
-    
+
+
 
     implementation 'com.fasterxml.woodstox:woodstox-core:6.7.0'
-    
+
     implementation 'org.apache.commons:commons-lang3:3.18.0'
-    
+    implementation 'commons-lang:commons-lang:2.6'
+    implementation 'commons-codec:commons-codec:1.17.1'
 
 
-    
+
     providedCompile 'javax:javaee-api:7.0'
-}
-
-war {
-    // Fixed: Set the custom WebContent folder using modern API
-    webAppDirectory = file('WebContent')
-    
-    // Fixed: archiveName was replaced by archiveFileName
-    archiveFileName = 'altoromutual.war'
-    
-    exclude 'WEB-INF/classes/**/*.class'
-    exclude 'WEB-INF/lib/**/*.jar'
 }
